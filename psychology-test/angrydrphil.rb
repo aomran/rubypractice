@@ -22,7 +22,7 @@ class AngryDrPhil
 
 	def feeling
 		ask "#{speaker_title} How are you feeling today?"
-		say speaker_says('Your feelings? To he** with your feelings!')
+		say speaker_says("Your feelings? To he** with your feelings!")
 	end
 
 	def sleep
@@ -32,7 +32,7 @@ class AngryDrPhil
 	def nutrition
 		answer = ask "#{speaker_title} How is your eating, too much/not enough?"
 		if /not enough/ =~ answer
-			 say speaker_says('You need to listen to your body because your body is listening to you.')
+			 say speaker_says("You need to listen to your body because your body is listening to you.")
 		end
 	end
 
@@ -49,7 +49,7 @@ class AngryDrPhil
 			q.validate = /^(yes|no)$/
 		end
 		if answer == "yes"
-			say speaker_says('You need to marry yo\' baby mama.')
+			say speaker_says("You need to marry yo' baby mama.")
 		end
 	end
 
@@ -62,13 +62,13 @@ class AngryDrPhil
 			q.validate = /^(yes|no)$/
 		end
 		if answer == "yes"
-			say speaker_says('You have the duty and gift of living. You don\'t have the right to sit on the sidelines--use your life and get back into the game.')
+			say speaker_says("You have the duty and gift of living. You don't have the right to sit on the sidelines--use your life and get back into the game.")
 		end
 	end
 
 	def depression_cause
 		ask "#{speaker_title} What makes you depressed (anything specific?)"
-		say speaker_says('Awareness without action is worthless.')
+		say speaker_says("Awareness without action is worthless.")
 	end
 
 	def killing_thoughts
@@ -86,8 +86,8 @@ class AngryDrPhil
 	end
 
 	def greet
-		say speaker_says('Hello, this is Dr. Phil. If someone out there doesn\'t agree with me, then somewhere a village is missing their idiot.', false)
-		say speaker_says('I\'ll be asking you a few questions now.', false)
+		say speaker_says("Hello, this is Dr. Phil. If someone out there doesn't agree with me, then somewhere a village is missing their idiot.", false)
+		say speaker_says("I'll be asking you a few questions now.", false)
 		puts
 	end
 
