@@ -22,21 +22,18 @@ class LeetString
 		# except the alternation starts over with lowercase after a digit
 		phrase.map! do |word|
 			i = 0
-			word.split("").map! do |letter|
+			word_with_caps = ""
+
+			word.each_char do |letter|
 				if consonant?(letter)
-					if i.even? then letter.downcase!
-					else
-						letter.upcase!
-					end
+					i.even? ? letter.downcase! : letter.upcase!
 					i += 1 # so that the next consonant capitalization alternates
-					letter
 				elsif leet_num?(letter)
 					i = 0 # reset after number
-					letter
-				else	
-					letter
 				end
-			end.join
+				word_with_caps << letter
+			end
+			word_with_caps
 		end
 	end
 
