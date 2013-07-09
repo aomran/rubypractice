@@ -20,7 +20,7 @@ class LeetString
 		# Words that start with a consonant start with lower case
 		# Consonants after the first letter alternate upper and lower case,
 		# except the alternation starts over with lowercase after a digit
-		phrase.map! do |word|
+		phrase.split.map! do |word|
 			i = 0
 			word_with_caps = ""
 
@@ -34,12 +34,12 @@ class LeetString
 				word_with_caps << letter
 			end
 			word_with_caps
-		end
+		end.join(" ")
 	end
 
 	def build_leet_phrase
-		leet_phrase = alternate_caps(@phrase.split)
-		leet_phrase = replace_aeio_with_num(leet_phrase.join(" "))
+		leet_phrase = alternate_caps(@phrase)
+		leet_phrase = replace_aeio_with_num(leet_phrase)
 	end
 
 	def to_s
