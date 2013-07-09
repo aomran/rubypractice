@@ -1,3 +1,5 @@
+# I have never watched a Dr. Phil show but this is how I imagine a session would go.
+
 require 'highline/import'
 
 class AngryDrPhil
@@ -8,7 +10,7 @@ class AngryDrPhil
   def speaker_title
   	"<%= color('Dr.Phil', BLUE) %>: "
   end
-  
+
 	def feeling
 		ask "#{speaker_title} How are you feeling today?"
 		say %{#{speaker_title} <%= color("Your feelings? To he** with your feelings!",RED) %>}
