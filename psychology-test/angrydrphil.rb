@@ -7,6 +7,7 @@ class AngryDrPhil
   QUESTIONS = [:feeling, :sleep, :nutrition, :physical_health, :therapy_history,
     :anxiety, :agitated, :suicidal, :depression_cause, :killing_thoughts]
 
+  # Helper Methods
   private
   def speaker_title
     "<%= color('Dr.Phil', BLUE) %>: "
@@ -21,6 +22,7 @@ class AngryDrPhil
     "#{speaker_title} #{comment} \n"
   end
 
+  # Questions
   def feeling
     ask "#{speaker_title} How are you feeling today?"
     say speaker_says("Your feelings? To he** with your feelings!")
@@ -33,14 +35,14 @@ class AngryDrPhil
   def nutrition
     answer = ask "#{speaker_title} How is your eating, too much/not enough?"
     if /not enough/ =~ answer
-       say speaker_says("You need to listen to your body because your "\
+      say speaker_says("You need to listen to your body because your "\
         "body is listening to you.")
     end
   end
 
   def physical_health
     ask "#{speaker_title} Do you have any medical health issues? "\
-    "Any allergies or medication?"
+      "Any allergies or medication?"
   end
 
   def therapy_history
@@ -77,8 +79,9 @@ class AngryDrPhil
   end
 
   def killing_thoughts
-    answer = ask "#{speaker_title} Have you thought about killing "\
-    "animals or people?" do |q|
+    question = "#{speaker_title} Have you thought about killing "\
+      "animals or people?"
+    answer = ask question do |q|
       q.validate = /^(yes|no)$/
     end
 
@@ -96,6 +99,7 @@ class AngryDrPhil
     end
   end
 
+  # Components of a session
   def greet
     say speaker_says("Hello, this is Dr. Phil. If someone out there doesn't "\
       "agree with me, then somewhere a village is missing their idiot.", false)
