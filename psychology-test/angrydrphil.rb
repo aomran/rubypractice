@@ -4,7 +4,8 @@ require 'highline/import'
 
 class AngryDrPhil
 
-  QUESTIONS = [:feeling, :sleep, :nutrition, :physical_health, :therapy_history, :anxiety, :agitated, :suicidal, :depression_cause, :killing_thoughts]
+  QUESTIONS = [:feeling, :sleep, :nutrition, :physical_health, :therapy_history,
+    :anxiety, :agitated, :suicidal, :depression_cause, :killing_thoughts]
 
   private
   def speaker_title
@@ -32,12 +33,14 @@ class AngryDrPhil
   def nutrition
     answer = ask "#{speaker_title} How is your eating, too much/not enough?"
     if /not enough/ =~ answer
-       say speaker_says("You need to listen to your body because your body is listening to you.")
+       say speaker_says("You need to listen to your body because your "\
+        "body is listening to you.")
     end
   end
 
   def physical_health
-    ask "#{speaker_title} Do you have any medical health issues? Any allergies or medication?"
+    ask "#{speaker_title} Do you have any medical health issues? "\
+    "Any allergies or medication?"
   end
 
   def therapy_history
@@ -62,7 +65,9 @@ class AngryDrPhil
       q.validate = /^(yes|no)$/
     end
     if answer == "yes"
-      say speaker_says("You have the duty and gift of living. You don't have the right to sit on the sidelines--use your life and get back into the game.")
+      say speaker_says("You have the duty and gift of living. "\
+        "You don't have the right to sit on the sidelines--use your "\
+        "life and get back into the game.")
     end
   end
 
@@ -72,21 +77,28 @@ class AngryDrPhil
   end
 
   def killing_thoughts
-    answer = ask "#{speaker_title} Have you thought about killing animals or people?" do |q|
+    answer = ask "#{speaker_title} Have you thought about killing "\
+    "animals or people?" do |q|
       q.validate = /^(yes|no)$/
     end
 
     if answer == "yes"
       choose do |menu|
         menu.prompt = "So which was it?"
-        menu.choice(:animals) { say speaker_says("You're a terrible person but it's ok.") }
-        menu.choice(:people) { say speaker_says("When you choose your behavior, you choose your consequences.") }
+        menu.choice(:animals) do
+          say speaker_says("You're a terrible person but it's ok.")
+        end
+        menu.choice(:people) do
+          say speaker_says("When you choose your behavior, you choose "\
+            "your consequences.")
+        end
       end
     end
   end
 
   def greet
-    say speaker_says("Hello, this is Dr. Phil. If someone out there doesn't agree with me, then somewhere a village is missing their idiot.", false)
+    say speaker_says("Hello, this is Dr. Phil. If someone out there doesn't "\
+      "agree with me, then somewhere a village is missing their idiot.", false)
     say speaker_says("I'll be asking you a few questions now.", false)
     puts
   end
