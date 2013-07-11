@@ -12,12 +12,12 @@ class ColorComment
     %Q{<%= color("#{@speaker_name}", BLUE) %>: }
   end
 
-  def colour_comment(phrase)
+  def color_comment(phrase)
     %Q{ <%= color("#{phrase}", RED) %> }
   end
 
   def parse(phrase, color)
-    phrase = colour_comment(phrase) if color
+    phrase = color_comment(phrase) if color
     "#{comment_title} #{phrase} \n"
   end
 
