@@ -2,21 +2,21 @@
 
 require 'highline/import'
 
-class DoctorSpeak
+class ColorComment
 
-  def initialize(doctor_name)
-    @doctor_name = doctor_name
+  def initialize(speaker_name)
+    @speaker_name = speaker_name
   end
 
   def comment_title
-    %Q{<%= color("#{@doctor_name}", BLUE) %>: }
+    %Q{<%= color("#{@speaker_name}", BLUE) %>: }
   end
 
   def colour_comment(phrase)
     %Q{ <%= color("#{phrase}", RED) %> }
   end
 
-  def comment(phrase, color)
+  def parse(phrase, color)
     phrase = colour_comment(phrase) if color
     "#{comment_title} #{phrase} \n"
   end
@@ -27,14 +27,14 @@ class AngryDrPhil
 
   def initialize(doctor_name)
     @doctor_name = doctor_name
-    @doctor_speak = DoctorSpeak.new(@doctor_name)
+    @color_comment = ColorComment.new(@doctor_name)
   end
 
   QUESTIONS = [:feeling, :sleep, :nutrition, :physical_health, :therapy_history,
     :anxiety, :agitated, :suicidal, :depression_cause, :killing_thoughts]
 
   def doctor_says(phrase, color=true)
-    @doctor_speak.comment(phrase, color)
+    @color_comment.parse(phrase, color)
   end
 
   private
