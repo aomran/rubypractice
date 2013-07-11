@@ -2,85 +2,101 @@
 
 require 'highline/import'
 
+class DoctorSpeak
+
+  def initialize(doctor_name)
+    @doctor_name = doctor_name
+  end
+
+  def comment_title
+    %Q{<%= color("#{@doctor_name}", BLUE) %>: }
+  end
+
+  def colour_comment(phrase)
+    %Q{ <%= color("#{phrase}", RED) %> }
+  end
+
+  def comment(phrase, color)
+    phrase = colour_comment(phrase) if color
+    "#{comment_title} #{phrase} \n"
+  end
+
+end
+
 class AngryDrPhil
+
+  def initialize(doctor_name)
+    @doctor_name = doctor_name
+    @doctor_speak = DoctorSpeak.new(@doctor_name)
+  end
 
   QUESTIONS = [:feeling, :sleep, :nutrition, :physical_health, :therapy_history,
     :anxiety, :agitated, :suicidal, :depression_cause, :killing_thoughts]
 
-  # Helper Methods
+  def doctor_says(phrase, color=true)
+    @doctor_speak.comment(phrase, color)
+  end
+
   private
-  def speaker_title
-    "<%= color('Dr.Phil', BLUE) %>: "
-  end
-
-  def colour_comment(comment)
-    %Q{ <%= color("#{comment}", RED) %> }
-  end
-
-  def speaker_says(comment, color=true)
-    comment = colour_comment(comment) if color
-    "#{speaker_title} #{comment} \n"
-  end
-
   # Questions
   def feeling
-    ask "#{speaker_title} How are you feeling today?"
-    say speaker_says("Your feelings? To he** with your feelings!")
+    ask doctor_says("How are you feeling today?", false)
+    say doctor_says("Your feelings? To he** with your feelings!")
   end
 
   def sleep
-    ask "#{speaker_title} How is your sleeping, too much/not enough?"
+    ask doctor_says("How is your sleeping, too much/not enough?", false)
   end
 
   def nutrition
-    answer = ask "#{speaker_title} How is your eating, too much/not enough?"
+    answer = ask doctor_says("How is your eating, too much/not enough?", false)
     if /not enough/ =~ answer
-      say speaker_says("You need to listen to your body because your "\
+      say doctor_says("You need to listen to your body because your "\
         "body is listening to you.")
     end
   end
 
   def physical_health
-    ask "#{speaker_title} Do you have any medical health issues? "\
-      "Any allergies or medication?"
+    ask doctor_says("Do you have any medical health issues? "\
+      "Any allergies or medication?", false)
   end
 
   def therapy_history
-    ask "#{speaker_title} Have you ever been in therapy before?"
+    ask doctor_says("Have you ever been in therapy before?", false)
   end
 
   def anxiety
-    answer = ask "#{speaker_title} Do you feel anxious?" do |q|
+    answer = ask doctor_says("Do you feel anxious?", false) do |q|
       q.validate = /^(yes|no)$/
     end
     if answer == "yes"
-      say speaker_says("You need to marry yo' baby mama.")
+      say doctor_says("You need to marry yo' baby mama.")
     end
   end
 
   def agitated
-    ask "#{speaker_title} Do you feel agitated?"
+    ask doctor_says("Do you feel agitated?", false)
   end
 
   def suicidal
-    answer = ask "#{speaker_title} Have you had suicidal thoughts?" do |q|
+    answer = ask doctor_says("Have you had suicidal thoughts?", false)   do |q|
       q.validate = /^(yes|no)$/
     end
     if answer == "yes"
-      say speaker_says("You have the duty and gift of living. "\
+      say doctor_says("You have the duty and gift of living. "\
         "You don't have the right to sit on the sidelines--use your "\
         "life and get back into the game.")
     end
   end
 
   def depression_cause
-    ask "#{speaker_title} What makes you depressed (anything specific?)"
-    say speaker_says("Awareness without action is worthless.")
+    ask doctor_says("What makes you depressed (anything specific?)", false)
+    say doctor_says("Awareness without action is worthless.")
   end
 
   def killing_thoughts
-    question = "#{speaker_title} Have you thought about killing "\
-      "animals or people?"
+    question = doctor_says("Have you thought about killing "\
+      "animals or people?", false)
     answer = ask question do |q|
       q.validate = /^(yes|no)$/
     end
@@ -89,10 +105,10 @@ class AngryDrPhil
       choose do |menu|
         menu.prompt = "So which was it?"
         menu.choice(:animals) do
-          say speaker_says("You're a terrible person but it's ok.")
+          say doctor_says("You're a terrible person but it's ok.")
         end
         menu.choice(:people) do
-          say speaker_says("When you choose your behavior, you choose "\
+          say doctor_says("When you choose your behavior, you choose "\
             "your consequences.")
         end
       end
@@ -101,9 +117,9 @@ class AngryDrPhil
 
   # Components of a session
   def greet
-    say speaker_says("Hello, this is Dr. Phil. If someone out there doesn't "\
+    say doctor_says("Hello, this is Dr. Phil. If someone out there doesn't "\
       "agree with me, then somewhere a village is missing their idiot.", false)
-    say speaker_says("I'll be asking you a few questions now.", false)
+    say doctor_says("I'll be asking you a few questions now.", false)
     puts
   end
 
@@ -122,7 +138,7 @@ class AngryDrPhil
 
 end
 
-drphil = AngryDrPhil.new
+drphil = AngryDrPhil.new('Dr Phil')
 drphil.start_session
 
 # Source of quotes:
