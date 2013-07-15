@@ -7,8 +7,12 @@ class Say
 
 	TEENS = [nil, nil, "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety", "one hundred"]
 
+	MINNUM = 0
+	MAXNUM = 109
 	def initialize(num)
-		raise ArgumentError if num < 0 || num > 110
+		if num < 0 || num > 110
+				raise ArgumentError, "Number must be between #{MINNUM} and #{MAXNUM}, inclusive."
+		end
 		@num = num	 
 	end
 
@@ -24,5 +28,5 @@ class Say
 	end
 end
 
-number = Say.new(gets.to_i).in_english
-exec("say #{number}")
+# number = Say.new(gets.to_i).in_english
+# exec("say #{number}")
