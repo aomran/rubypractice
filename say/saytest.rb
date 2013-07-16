@@ -28,9 +28,9 @@ class SayTest < MiniTest::Unit::TestCase
     assert_equal "one hundred and eight", Say.new(108).in_english
   end
 
-  def test_114_returns_error
+  def test_111_returns_error
     assert_raises ArgumentError do
-    	Say.new(114).in_english
+    	Say.new(111).in_english
     end 
   end
 
