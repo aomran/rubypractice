@@ -28,4 +28,28 @@ class Chunks
 		num_array
 	end
 
+	def say_magnitude
+		num_array = split
+
+		first_part = if num_array[0] != 0
+			num_array[0].to_s + " billion "
+		else
+			""
+		end
+
+		second_part = if num_array[1] != 0
+			num_array[1].to_s + " million "
+		else
+			""
+		end
+
+		third_part = if num_array[2] != 0
+			num_array[2].to_s + " thousand "
+		else
+			""
+		end
+
+		"#{first_part}#{second_part}#{third_part}#{num_array[3]}"
+	end
+
 end

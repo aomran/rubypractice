@@ -47,4 +47,25 @@ class ChunksTest < MiniTest::Unit::TestCase
 			Chunks.new(20100000000000)
 		end
 	end
+
+	def test_say_magnitude_1234567890
+		assert_equal "1 billion 234 million 567 thousand 890", Chunks.new(1234567890).say_magnitude
+	end
+
+
+	def test_say_magnitude_234567890
+		assert_equal "234 million 567 thousand 890", Chunks.new(234567890).say_magnitude
+	end
+
+	def test_say_magnitude_567890
+		assert_equal "567 thousand 890", Chunks.new(567890).say_magnitude
+	end
+
+	def test_say_magnitude_890
+		assert_equal "890", Chunks.new(890).say_magnitude
+	end
+
+	def test_1_million_2_thousand_345
+    assert_equal '1 million 2 thousand 345', Chunks.new(1002345).say_magnitude
+  end
 end

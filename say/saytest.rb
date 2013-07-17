@@ -34,7 +34,6 @@ class SayTest < MiniTest::Unit::TestCase
     end 
   end
 
-  # Number must be between 0 and 99, inclusive. (ArgumentError)
   def test_minus_1_returns_error
     assert_raises ArgumentError do
     	Say.new(-1).in_english
