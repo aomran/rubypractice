@@ -1,4 +1,6 @@
-class Chunks
+require_relative './numtoword'
+
+class Say
 
 	def initialize(num)
 		if num.to_s.size > 12 || num < 0
@@ -20,11 +22,11 @@ class Chunks
 	def split
 		numstring = stringify
 		num_array = []
-		
+
 		until numstring.size == 0
 		num_array << numstring.slice!(/\d\d\d/).to_i
 		end
-		
+
 		num_array
 	end
 
@@ -32,24 +34,24 @@ class Chunks
 		num_array = split
 
 		first_part = if num_array[0] != 0
-			num_array[0].to_s + " billion "
+			NumToWord.new(num_array[0].to_i).in_english + " billion "
 		else
 			""
 		end
 
 		second_part = if num_array[1] != 0
-			num_array[1].to_s + " million "
+			NumToWord.new(num_array[1].to_i).in_english + " million "
 		else
 			""
 		end
 
 		third_part = if num_array[2] != 0
-			num_array[2].to_s + " thousand "
+			NumToWord.new(num_array[2].to_i).in_english + " thousand "
 		else
 			""
 		end
 
-		"#{first_part}#{second_part}#{third_part}#{num_array[3]}"
+		"#{first_part}#{second_part}#{third_part}" + NumToWord.new(num_array[3]).in_english
 	end
 
 end
